@@ -1,0 +1,20 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+WORKDIR /App
+EXPOSE 80
+
+
+# Copy everything
+COPY . ./
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /App
+EXPOSE 80
+
+ARG ENV
+ENV DOTNET_ENVIRONMENT=$ENV
+
+RUN echo "sss"
+
+COPY --from=build-env App/bin/Debug/net7.0 .
+ENTRYPOINT ["dotnet", "RocketFin.Api.dll"]

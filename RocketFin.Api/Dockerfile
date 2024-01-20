@@ -1,25 +1,16 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
+WORKDIR /App
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
+# Copy everything
+COPY . ./
+# Restore as distinct layers
+RUN dotnet restore
+# Build and publish a release
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 EXPOSE 80
-
-
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-COPY ["RocketFin.Api/RocketFin.Api.csproj", "RocketFin.Api/"]
-RUN dotnet restore "RocketFin.Api/RocketFin.Api.csproj"
-COPY . .
-WORKDIR "/src/RocketFin.Api"
-RUN dotnet build "RocketFin.Api.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "RocketFin.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
-RUN dotnet dev-certs https --clean
-RUN dotnet dev-certs https --trust 
-RUN dotnet dev-certs https --check 
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
+WORKDIR /App
+COPY --from=build-env /App/out .
 ENTRYPOINT ["dotnet", "RocketFin.Api.dll"]

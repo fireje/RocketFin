@@ -20,7 +20,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-builder.Services.AddDbContext<RocketFinDbContext>(options => options.UseSqlite("DataSource=app.db; Cache=Shared"));
+builder.Services.AddDbContext<RocketFinDbContext>(options => options.UseSqlite("DataSource=./db/app.db"));
 
 
 var allowedOrigin = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();

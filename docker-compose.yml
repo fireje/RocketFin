@@ -14,18 +14,7 @@ services:
       - DOTNET_ENVIRONMENT=Development
       
 
-  rocketfin-frontend:
-    image: rocketfin-frontend:1.0.2
-    container_name: rocketfin-frontend
-    build:
-      context: .
-      dockerfile: RocketFin.UI/Dockerfile
-    networks:
-      - rocketfi-net
-    ports:
-      - 3000:3000
-    depends_on:
-      - rocketfin.api
+
 networks:
   rocketfi-net:
      driver: bridge
