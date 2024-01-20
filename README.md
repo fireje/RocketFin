@@ -8,6 +8,7 @@ To create build and create the API container execute the below. To execute go th
 Nb. Keep the port as it is since the ui is refering to the url with 8020
 
 docker build --file Dockerfile --tag rocketfin.api .
+
 docker run --name RocketFinApi -p 8020:80 -d rocketfin.api 
 
 The UI conencts with the API
@@ -15,5 +16,7 @@ The UI conencts with the API
   Click on Buy Share to purchase a stock, in the search enter th ticker like AAPL to retreive the details. Once the details are retrieve you can purchase the stock
 
 Use the below commands to build and run the application in docker container
+
 docker build --file Dockerfile --tag rocketfin.ui .
+
 docker run --name RocketFinUI -p 3000:3000 -d rocketfin.ui
