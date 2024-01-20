@@ -1,0 +1,24 @@
+.divRow {
+    background-color: #ffffff;
+    width: 100%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    height: 40px;
+    border-bottom: 1px solid #808080;
+}
+
+.divHeader {
+    float: left;
+    width: 15%;
+    height: 100%;
+    text-align: center;
+    border-right: 1px solid #808080;
+    background-color: #333a5a;
+}
+
+.divHeader p{
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    margin: 2px;
+}
