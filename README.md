@@ -8,7 +8,7 @@ Follow the below steps to build and run the API as a docker container.
 
 - Open CMD and go the directory where is the RocketFin.Api folder
 - Execute this command to build the image `docker build --file Dockerfile --tag rocketfin.api .`
-- Execute this command to run the image `docker run --name RocketFinApi -p 8020:80 -d rocketfin.api`
+- Execute this command to run the image `docker run --name RocketFinApi -p 8020:80 -d -e DOTNET_ENVIRONMENT=Staging rocketfin.api`
 
 #### SQLLite:
 - It has one table called Ledger. The below are the columns
