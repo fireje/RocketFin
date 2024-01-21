@@ -30,7 +30,7 @@ namespace RocketFin.Api.Application.Queries.GetPortfolio
 
 			if(!string.IsNullOrEmpty(request.ticker))
 			{
-				portoflio = portoflio.Where(x => x.InstrumentName == request.ticker).ToList();
+				portoflio = portoflio.Where(x => x.InstrumentName.ToLower().Contains(request.ticker.ToLower())).ToList();
 			}
 
 			return portoflio;
