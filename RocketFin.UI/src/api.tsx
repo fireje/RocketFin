@@ -12,9 +12,8 @@ export interface SearchResponse {
 
 export const getPortfolio = async (query: string) => {
     try {
-
         const data = await axios.get<SearchResponse>(
-            `http://localhost:8020/api/Shares?ticker=${query}`
+            `${process.env.REACT_APP_API_URL}api/Shares?ticker=${query}`
         );
 
         return data;
@@ -33,7 +32,7 @@ export const getInstrument = async (query: string) => {
     try {
 
         const data = await axios.get<InstrumentResponse>(
-            `http://localhost:8020/api/Instrument?ticker=${query}`
+            `${process.env.REACT_APP_API_URL}api/Instrument?ticker=${query}`
         );
 
         return data;
@@ -45,7 +44,7 @@ export const getInstrument = async (query: string) => {
 
 
 export const purchaseStock = async (numberOfShares: number, instrumentName: string, price : number ) => {
-    const data = await axios.post(`http://localhost:8020/api/Shares`, {
+    const data = await axios.post(`${process.env.REACT_APP_API_URL}api/Shares`, {
         numberOfShares: numberOfShares,
         instrumentName: instrumentName,
         price : price

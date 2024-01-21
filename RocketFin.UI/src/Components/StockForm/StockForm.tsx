@@ -34,12 +34,9 @@ const StockForm = ({ onSubmit, instrument, price }: Props) => {
         <form onSubmit={handleSubmit}>
             
             <b>Number of Stock: </b>
-                 <input type="number" name="numberOfStocks"  onChange={handleInputChange} />
+                 <input type="number" name="numberOfStocks"  onChange={handleInputChange} />  
             
-            <br />
-                 <input name="instrumentName" type="hidden" onChange={handleInputChange}  />
-  
-            <button type="submit">Submit</button>
+                 <button type="submit" style={{ marginLeft: "2px", backgroundColor : "black" }}>Buy</button>
              </form>
 
          </>

@@ -1,22 +1,38 @@
-# RocketFin
+# RocketFin Assigment - Joseph D'Amato
 
-The solution is divided into three projects
+#### The backen api is written with .Net7.0. The below are information about the controllers
+ - The Intrumenent Controller: The GET method will retreive the instrument details by calling the IYH Finance API
+ - The Share Controller: The GET method will connect to the SQLite DB to retreive the portfolio. The POST method inserts data into the SQLite DB
+ 
+Follow the below steps to build and run the API as a docker container. 
 
-The API connects with the SQLLite db. The database has one table called Ledger. 
+- Open CMD and go the directory where is the RocketFin.Api folder
+- Execute this command to build the image `docker build --file Dockerfile --tag rocketfin.api .`
+- Execute this command to run the image `docker run --name RocketFinApi -p 8020:80 -d rocketfin.api`
 
-To create build and create the API container execute the below. To execute go the directory where is the RocketFin.API
-Nb. Keep the port as it is since the ui is refering to the url with 8020
+#### SQLLite:
+- It has one table called Ledger. The below are the columns
+     
+    - Id - Primary key and auto increment
+     - TransactionId
+     - TransactionTimeStampUTC
+     - InstrumentName
+     - NumberOfShares
+     - Price
+    
+Since it is a for demo there is no need to add volumn while running the docker command
 
-docker build --file Dockerfile --tag rocketfin.api .
 
-docker run --name RocketFinApi -p 8020:80 -d rocketfin.api 
+### Testing Project using the Xunit
+- It tests the domain
 
-The UI conencts with the API
-  Click on the portfolio to retreive the ledgers table, you can search by the  instrument name. The search has to be the extact name. 
-  Click on Buy Share to purchase a stock, in the search enter th ticker like AAPL to retreive the details. Once the details are retrieve you can purchase the stock
+### Frontend is built using React
+- The Portfolio page retreives the user portfolio. The user can also search by the instrument name. [Click here](http://localhost:3000/portfolio) to access the portfolio page 
+- The Buy Share provides the possibality to buy shares. The user has to search for the Stock by entering the ticker symbol (example: MSFT,AAPL,GOOG,GOOGL,AMZN). Once the Stock information is retreived the user can place the order. [Click here](http://localhost:3000/shares) to access the buy Shares page 
 
-Use the below commands to build and run the application in docker container
+Follow the below steps to build and run the Frontend as a docker container. 
 
-docker build --file Dockerfile --tag rocketfin.ui .
+- Open CMD and go the directory where is the rocketfin.ui folder
+- Execute this command to build the image `docker build --file Dockerfile --tag rocketfin.ui .`
+- Execute this command to run the image `docker run --name RocketFinUI -p 3000:3000 -d rocketfin.ui`
 
-docker run --name RocketFinUI -p 3000:3000 -d rocketfin.ui

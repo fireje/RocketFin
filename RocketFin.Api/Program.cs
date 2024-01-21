@@ -8,6 +8,7 @@ using RocketFin.Api.Persistance.Repositories;
 using RocketFin.Api.Domain;
 using RocketFin.Api.Models;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-builder.Services.AddDbContext<RocketFinDbContext>(options => options.UseSqlite("DataSource=./db/app.db"));
+builder.Services.AddDbContext<RocketFinDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("RocketFinDB")));
 
 
 var allowedOrigin = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
